@@ -1,19 +1,38 @@
 class ApplicationController < ActionController::Base
+
+  before_action :authenticate_user!, except: [:top, :about]
+  before_action :forbid_log_in_user, only: [:about]
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+
+
+  def forbid_log_in_user
+    user = User.find(current_user.id)
+    if user == current_user
+      flash[:alert] = "You are already logged in user."
+      redirect_to books_path
+    end
+  end
+
+
+
   def after_sign_up_path_for(resource)
     user_path(current_user)
   end
-  
+
+
+
   def after_sign_in_path_for(resource)
     user_path(current_user)
   end
 
 
-  
+
   def after_sign_out_path_for(resource)
     root_path
   end
+
+
+
 
   protected
 
