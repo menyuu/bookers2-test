@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
 
 
   def forbid_log_in_user
-    user = User.find(current_user.id)
-    if user == current_user
+    if   current_user
       flash[:alert] = "You are already logged in user."
       redirect_to books_path
     end
