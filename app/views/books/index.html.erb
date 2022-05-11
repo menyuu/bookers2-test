@@ -13,12 +13,12 @@
 
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 mb-5">
       <%= render 'layouts/list' %>
     </div>
 
 
-    <div class="col-md-8 mt-sm-5 offset-md-1">
+    <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
       <table class="table table-hover">
         <thead>
@@ -40,7 +40,7 @@
             </td>
             <td><%= link_to book.title, book_path(book.id) %></td>
             <td></td>
-            <td colspan="3"><%= book.body %></td>
+            <td colspan="3" style="word-break: break-all;"><%= book.body %></td>
           </tr>
         </tbody>
         <% end %>

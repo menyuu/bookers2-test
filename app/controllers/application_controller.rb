@@ -11,18 +11,26 @@ class ApplicationController < ActionController::Base
       redirect_to books_path
     end
   end
-
-
-
+  
+  
   def ensure_correct_user
-    book = Book.find(params[:id])
-    if current_user.id != book.user_id
+    if current_user.id != params[:id].to_i
       flash[:alert] = "The account is different."
       redirect_to books_path
     end
   end
 
 
+
+  def ensure_correct_book_user
+    book = Book.find(params[:id])
+    if current_user.id != book.user_id
+      flash[:alert] = "The account is different."
+      redirect_to books_path
+    end
+  end
+  
+  
 
   def after_sign_up_path_for(resource)
     user_path(current_user)
